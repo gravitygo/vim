@@ -1,2 +1,3 @@
 require("gravitygo.remap")
-print("hi from gravitygo")
+require("gravitygo.set")
+print("Hi from GravityGo")
