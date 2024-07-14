@@ -7,3 +7,20 @@ vim.keymap.set("n", "<leader>]", ':resize  +5<CR>', { noremap = true, silent = t
 vim.keymap.set("v", "<leader>y", '"+y', { noremap = true, silent = true})
 vim.keymap.set("v", "<leader>p", '"+p', { noremap = true, silent = true})
 
+local cmp = require('cmp')
+local cmp_action = require('lsp-zero').cmp_action()
+
+cmp.setup({
+  mapping = {
+    -- Navigate between completion item
+    ['<M-k>'] = cmp.mapping.select_prev_item(),
+    ['<M-j>'] = cmp.mapping.select_next_item(),
+
+    -- toggle completion
+    ['<M-u>'] = cmp_action.toggle_completion(),
+
+    -- Confirm item
+    ['<Tab>'] = cmp.mapping.confirm({select = true}),
+  }
+})
+
