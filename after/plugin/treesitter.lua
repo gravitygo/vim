@@ -22,3 +22,4 @@ require'nvim-treesitter.configs'.setup {
     additional_vim_regex_highlighting = false,
   },
 }
+vim.cmd('autocmd BufRead,BufNewFile *.html set filetype=html')

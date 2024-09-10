@@ -6,6 +6,10 @@ vim.keymap.set("n", "<leader>[", ':resize  -5<CR>', { noremap = true, silent = t
 vim.keymap.set("n", "<leader>]", ':resize  +5<CR>', { noremap = true, silent = true})
 vim.keymap.set("v", "<leader>y", '"+y', { noremap = true, silent = true})
 vim.keymap.set("v", "<leader>p", '"+p', { noremap = true, silent = true})
+vim.keymap.set("i", "<leader>/", ':lua vim.lsp.buf.code_action()<CR>', { noremap = true, silent = true})
+vim.keymap.set("n", "<leader>/", ':lua vim.lsp.buf.code_action()<CR>', { noremap = true, silent = true})
+vim.keymap.set("n", "<leader>n", ':NERDTreeFocus<CR>', { noremap = true, silent = true})
+vim.keymap.set("v", "<leader>/", ':lua vim.lsp.buf.code_action()<CR>', { noremap = true, silent = true})
 
 local cmp = require('cmp')
 local cmp_action = require('lsp-zero').cmp_action()

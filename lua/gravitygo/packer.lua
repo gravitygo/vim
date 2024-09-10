@@ -12,13 +12,16 @@ return require('packer').startup(function(use)
         -- or                            , branch = '0.1.x',
         requires = { {'nvim-lua/plenary.nvim'} }
     }
+    use "andweeb/presence.nvim"
+    use "preservim/nerdtree"
+    use "ryanoasis/vim-devicons"
     use "rebelot/kanagawa.nvim"
     use({'nvim-treesitter/nvim-treesitter', {run =  ':TSUpdate'}})
     use('nvim-treesitter/playground')
     use('ThePrimeagen/harpoon')
     use('mbbill/undotree')
     use('tpope/vim-fugitive')
-
+    use {'akinsho/bufferline.nvim', tag = "*", requires = 'nvim-tree/nvim-web-devicons'}    
     use {
         'VonHeikemen/lsp-zero.nvim',
         branch = 'v3.x',
