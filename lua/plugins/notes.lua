@@ -87,11 +87,12 @@ return {
     -- URL it will be ignored but you can customize this behavior here.
     ---@param url string
     follow_url_func = function(url)
-      -- Open the URL in the default web browser.
-      vim.fn.jobstart({ "open", url }) -- Mac OS
-      -- vim.fn.jobstart({"xdg-open", url})  -- linux
-      -- vim.cmd(':silent exec "!start ' .. url .. '"') -- Windows
-      -- vim.ui.open(url) -- need Neovim 0.10.0+
+      local sys = vim.loop.os_uname().sysname
+      if sys == "Linux" then
+        vim.fn.jobstart({ "xdg-open", url }) -- linux
+      elseif sys:match("Windows") then
+        vim.cmd(':silent exec "!start ' .. url .. '"') -- Windows
+      end
     end,
 
     -- Optional, by default when you use `:ObsidianFollowLink` on a link to an image
@@ -105,6 +106,7 @@ return {
         vim.fn.jobstart({ "cmd.exe", "/c", "start", img })
       end
     end,
+
     templates = {
       folder = ".templates",
       date_format = "%Y-%m-%d",
