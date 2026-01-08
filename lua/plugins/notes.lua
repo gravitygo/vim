@@ -8,6 +8,25 @@ return {
       dependencies = { "nvim-lua/plenary.nvim" },
     },
   },
+  keys = {
+    {
+      "<leader>zn",
+      function()
+        local notes_dir = vim.fn.expand("~/vaults/zettelkasten/notes")
+
+        local date = os.date("%Y%m%d")
+        local files = vim.fn.glob(notes_dir .. "/" .. date .. "-*.md", false, true)
+        local index = #files + 1
+
+        local filename = string.format("%s/%s-%03d.md", notes_dir, date, index)
+
+        vim.cmd("edit " .. filename)
+        vim.cmd("ObsidianTemplate zettelkasten")
+        vim.cmd("normal! ggA")
+      end,
+      desc = "New Zettelkasten note",
+    },
+  },
   opts = {
     picker = {
       -- Set your preferred picker. Can be one of 'telescope.nvim', 'fzf-lua', or 'mini.pick'.
@@ -30,7 +49,7 @@ return {
     workspaces = {
       {
         name = "personal",
-        path = "~/vaults/trading",
+        path = "~/vaults/personal",
       },
       {
         name = "work",
@@ -39,10 +58,6 @@ return {
       {
         name = "Zettelkasten",
         path = "~/vaults/zettelkasten",
-      },
-      {
-        name = "archive",
-        path = "~/vaults/archive",
       },
     },
     mappings = {
@@ -68,6 +83,25 @@ return {
         opts = { buffer = true, expr = true },
       },
     },
+    -- Optional, by default when you use `:ObsidianFollowLink` on a link to an external
+    -- URL it will be ignored but you can customize this behavior here.
+    ---@param url string
+    follow_url_func = function(url)
+      -- Open the URL in the default web browser.
+      vim.fn.jobstart({ "open", url }) -- Mac OS
+      -- vim.fn.jobstart({"xdg-open", url})  -- linux
+      -- vim.cmd(':silent exec "!start ' .. url .. '"') -- Windows
+      -- vim.ui.open(url) -- need Neovim 0.10.0+
+    end,
+
+    -- Optional, by default when you use `:ObsidianFollowLink` on a link to an image
+    -- file it will be ignored but you can customize this behavior here.
+    ---@param img string
+    follow_img_func = function(img)
+      vim.fn.jobstart({ "qlmanage", "-p", img }) -- Mac OS quick look preview
+      -- vim.fn.jobstart({"xdg-open", url})  -- linux
+      -- vim.cmd(':silent exec "!start ' .. url .. '"') -- Windows
+    end,
     templates = {
       folder = ".templates",
       date_format = "%Y-%m-%d",
