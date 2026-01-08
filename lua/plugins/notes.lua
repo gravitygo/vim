@@ -1,43 +1,30 @@
--- lua/plugins/notes.lua
 return {
-  -- Dependency for Telescope & Obsidian.nvim
-  { "nvim-lua/plenary.nvim" },
-
-  -- Zettelkasten-style linking
-  {
-    "epwalsh/obsidian.nvim",
-    version = "*", -- recommended, use latest release instead of latest commit
-    lazy = true,
-    ft = "markdown",
-    dependencies = {
-      -- Required.
-      "nvim-lua/plenary.nvim",
-    },
-    opts = {
-      workspaces = {
-        {
-          name = "personal",
-          path = "~/vaults/personal",
-        },
-        {
-          name = "work",
-          path = "~/vaults/work",
-        },
-        {
-          name = "zettelkasten",
-          path = "~/vaults/zettelkasten",
-        },
+  "epwalsh/obsidian.nvim",
+  version = "*",
+  dependencies = {
+    "nvim-lua/plenary.nvim",
+  },
+  opts = {
+    workspaces = {
+      {
+        name = "personal",
+        path = "~/vaults/trading",
       },
-
-      -- see below for full list of options 👇
+      {
+        name = "work",
+        path = "~/vaults/work",
+      },
+      {
+        name = "archive",
+        path = "~/vaults/archive",
+      },
+    },
+    templates = {
+      folder = ".templates",
+      date_format = "%Y-%m-%d",
+      time_format = "%H:%M",
+      -- A map for custom variables, the key should be the variable and the value a function
+      substitutions = {},
     },
   },
-  -- Optional wiki-style notes
-  { "vimwiki/vimwiki" },
-
-  -- Optional graph visualization of Zettelkasten notes
-  { "phaazon/mind.nvim" },
-
-  -- Align tables, markdown, and code easily
-  { "junegunn/vim-easy-align" },
 }
