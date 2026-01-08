@@ -98,9 +98,12 @@ return {
     -- file it will be ignored but you can customize this behavior here.
     ---@param img string
     follow_img_func = function(img)
-      vim.fn.jobstart({ "qlmanage", "-p", img }) -- Mac OS quick look preview
-      -- vim.fn.jobstart({"xdg-open", url})  -- linux
-      -- vim.cmd(':silent exec "!start ' .. url .. '"') -- Windows
+      local sys = vim.loop.os_uname().sysname
+      if sys == "Linux" then
+        vim.fn.jobstart({ "xdg-open", img })
+      elseif sys:match("Windows") then
+        vim.fn.jobstart({ "cmd.exe", "/c", "start", img })
+      end
     end,
     templates = {
       folder = ".templates",
