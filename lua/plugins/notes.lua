@@ -8,25 +8,6 @@ return {
       dependencies = { "nvim-lua/plenary.nvim" },
     },
   },
-  keys = {
-    {
-      "<leader>zn",
-      function()
-        local notes_dir = vim.fn.expand("~/vaults/zettelkasten/notes")
-
-        local date = os.date("%Y%m%d")
-        local files = vim.fn.glob(notes_dir .. "/" .. date .. "-*.md", false, true)
-        local index = #files + 1
-
-        local filename = string.format("%s/%s-%03d.md", notes_dir, date, index)
-
-        vim.cmd("edit " .. filename)
-        vim.cmd("ObsidianTemplate zettelkasten")
-        vim.cmd("normal! ggA")
-      end,
-      desc = "New Zettelkasten note",
-    },
-  },
   opts = {
     picker = {
       -- Set your preferred picker. Can be one of 'telescope.nvim', 'fzf-lua', or 'mini.pick'.
@@ -83,29 +64,29 @@ return {
         opts = { buffer = true, expr = true },
       },
     },
-    -- Optional, by default when you use `:ObsidianFollowLink` on a link to an external
-    -- URL it will be ignored but you can customize this behavior here.
-    ---@param url string
-    follow_url_func = function(url)
-      local sys = vim.loop.os_uname().sysname
-      if sys == "Linux" then
-        vim.fn.jobstart({ "xdg-open", url }) -- linux
-      elseif sys:match("Windows") then
-        vim.cmd(':silent exec "!start ' .. url .. '"') -- Windows
-      end
-    end,
+    -- -- Optional, by default when you use `:ObsidianFollowLink` on a link to an external
+    -- -- URL it will be ignored but you can customize this behavior here.
+    -- ---@param url string
+    -- follow_url_func = function(url)
+    --   local sys = vim.loop.os_uname().sysname
+    --   if sys == "Linux" then
+    --     vim.fn.jobstart({ "xdg-open", url }) -- linux
+    --   elseif sys:match("Windows") then
+    --     vim.cmd(':silent exec "!start ' .. url .. '"') -- Windows
+    --   end
+    -- end,
 
-    -- Optional, by default when you use `:ObsidianFollowLink` on a link to an image
-    -- file it will be ignored but you can customize this behavior here.
-    ---@param img string
-    follow_img_func = function(img)
-      local sys = vim.loop.os_uname().sysname
-      if sys == "Linux" then
-        vim.fn.jobstart({ "xdg-open", img })
-      elseif sys:match("Windows") then
-        vim.fn.jobstart({ "cmd.exe", "/c", "start", img })
-      end
-    end,
+    -- -- Optional, by default when you use `:ObsidianFollowLink` on a link to an image
+    -- -- file it will be ignored but you can customize this behavior here.
+    -- ---@param img string
+    -- follow_img_func = function(img)
+    --   local sys = vim.loop.os_uname().sysname
+    --   if sys == "Linux" then
+    --     vim.fn.jobstart({ "xdg-open", img })
+    --   elseif sys:match("Windows") then
+    --     vim.fn.jobstart({ "cmd.exe", "/c", "start", img })
+    --   end
+    -- end,
 
     templates = {
       folder = ".templates",
