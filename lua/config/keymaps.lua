@@ -4,7 +4,7 @@
 local map = LazyVim.safe_keymap_set
 -- Zettelkasten: new note
 map("n", "<leader>zn", function()
-  local notes_dir = vim.fn.expand("~/vaults/zettelkasten/notes")
+  local notes_dir = vim.fn.expand("./3 Resources/notes")
   local date = os.date("%Y%m%d")
   local files = vim.fn.glob(notes_dir .. "/" .. date .. "-*.md", false, true)
   local index = #files + 1
