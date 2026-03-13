@@ -85,3 +85,14 @@ vim.api.nvim_create_user_command("UseWorkspace", function(opts)
     pick_workspace()
   end
 end, { nargs = "?" })
+
+vim.api.nvim_create_autocmd("BufEnter", {
+  callback = function(args)
+    local buf = args.buf
+
+    if vim.bo[buf].buftype == "" then
+      vim.bo[buf].modifiable = true
+      vim.bo[buf].readonly = false
+    end
+  end,
+})
